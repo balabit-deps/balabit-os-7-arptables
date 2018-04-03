@@ -1,0 +1,61 @@
+arptables (0.0.3.4-1build1) bionic; urgency=high
+
+  * No change rebuild to pick up -fPIE compiler default
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Tue, 03 Apr 2018 12:13:19 +0000
+
+arptables (0.0.3.4-1) unstable; urgency=low
+
+  * New upstream release
+  * Switch to dpkg-source 3.0 (quilt) format
+  * Bump Standards version to 3.8.4
+
+ -- Jochen Friedrich <jochen@scram.de>  Thu, 06 May 2010 17:54:18 +0200
+
+arptables (0.0.3.3-3) unstable; urgency=low
+
+  * Change dpatch to quilt and simplify rules.
+  * Add README.source.
+  * Fix watch file.
+
+ -- Jochen Friedrich <jochen@scram.de>  Fri, 16 Oct 2009 19:09:15 +0200
+
+arptables (0.0.3.3-2) unstable; urgency=low
+
+  * Fix arptables-save
+   o Don't resolve hostnames (Closes: #533497)
+   o Omit '*' interface in rules (Closes: #533496)
+  * Bump Standards version to 3.8.3
+  * Add homepage tag
+
+ -- Jochen Friedrich <jochen@scram.de>  Wed, 19 Aug 2009 14:39:39 +0200
+
+arptables (0.0.3.3-1) unstable; urgency=low
+
+  * New upstream release
+   o includes fix for linux/config.h include file
+   o removed some compiler warnings
+   o include arptables-save / arptables-restore scripts
+  * Update watchfile to support subreleases
+  * Standards version 3.7.3
+  * Update to debhelper v7 / dpatch and replaced cdbs
+  * Include patch from Jeroen van Wolffelaar <jeroen@wolffelaar.nl> to make
+    iptables --proto-type also accept hexadecimal inputs (Closes: #411169)
+
+ -- Jochen Friedrich <jochen@scram.de>  Thu, 08 May 2008 17:43:16 +0200
+
+arptables (0.0.3-2) unstable; urgency=low
+
+  * Remove linux/config.h include file (Closes: #427264)
+    Thanks to Jose Luis Rivas Contreras <ghostbar38@gmail.com>
+  * Added watch file
+  * Standards version 3.7.2 (no changes)
+
+ -- Jochen Friedrich <jochen@scram.de>  Thu, 21 Jun 2007 14:06:06 +0200
+
+arptables (0.0.3-1) unstable; urgency=low
+
+  * Initial Release. (Closes: #212914)
+
+ -- Jochen Friedrich <jochen@scram.de>  Sat, 25 Oct 2003 15:54:19 +0200
+

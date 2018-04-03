@@ -1,0 +1,16 @@
+Source: arptables
+Section: net
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Jochen Friedrich <jochen@scram.de>
+Standards-Version: 3.8.4
+Build-Depends: debhelper (>= 7.0.50~)
+Homepage: http://ebtables.sourceforge.net
+
+Package: arptables
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: ARP table administration
+ Arptables is used to set up, maintain, and inspect the tables of 
+ ARP rules in the Linux kernel. It is analogous to iptables,
+ but operates at the ARP layer rather than the IP layer.

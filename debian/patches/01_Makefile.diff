@@ -1,0 +1,73 @@
+Index: arptables-0.0.3.4/Makefile
+===================================================================
+--- arptables-0.0.3.4.orig/Makefile	2010-03-08 16:49:28.000000000 +0100
++++ arptables-0.0.3.4/Makefile	2010-05-06 17:52:03.000000000 +0200
+@@ -1,17 +1,17 @@
+-ARPTABLES_VERSION:=0.0.3-4
++ARPTABLES_VERSION:=0.0.3.4
+ 
+ KERNEL_DIR:=./
+ # default paths
+-PREFIX:=/usr/local
++PREFIX:=/usr
+ LIBDIR:=$(PREFIX)/lib
+-BINDIR:=$(PREFIX)/sbin
+-MANDIR:=$(PREFIX)/man
+-INITDIR:=/etc/rc.d/init.d
++BINDIR:=/sbin
++MANDIR:=$(PREFIX)/share/man
++INITDIR:=/etc/init.d
+ SYSCONFIGDIR:=/etc/sysconfig
+ DESTDIR:=
+ 
+-COPT_FLAGS:=-O2
+-CFLAGS:=$(COPT_FLAGS) -Wall -Wunused -I$(KERNEL_DIR)/include/ -Iinclude/ -DARPTABLES_VERSION=\"$(ARPTABLES_VERSION)\" #-g -DDEBUG #-pg # -DARPTC_DEBUG
++CFLAGS:=-O2
++CFLAGS2:=$(CFLAGS) -Wall -Wunused -I$(KERNEL_DIR)/include/ -Iinclude/ -DARPTABLES_VERSION=\"$(ARPTABLES_VERSION)\" #-g -DDEBUG #-pg # -DARPTC_DEBUG
+ 
+ ifndef ARPT_LIBDIR
+ ARPT_LIBDIR:=$(LIBDIR)/arptables
+@@ -22,16 +22,16 @@
+ all: arptables
+ 
+ arptables.o: arptables.c
+-	$(CC) $(CFLAGS) -c -o $@ $<
++	$(CC) $(CFLAGS2) -c -o $@ $<
+ 
+ arptables-standalone.o: arptables-standalone.c
+-	$(CC) $(CFLAGS) -c -o $@ $<
++	$(CC) $(CFLAGS2) -c -o $@ $<
+ 
+ libarptc/libarptc.o: libarptc/libarptc.c libarptc/libarptc_incl.c
+-	$(CC) $(CFLAGS) -c -o $@ $<
++	$(CC) $(CFLAGS2) -c -o $@ $<
+ 
+ arptables: arptables-standalone.o arptables.o libarptc/libarptc.o $(EXT_OBJS)
+-	$(CC) $(CFLAGS) -o $@ $^
++	$(CC) $(CFLAGS2) -o $@ $^
+ 
+ $(DESTDIR)$(MANDIR)/man8/arptables.8: arptables.8
+ 	mkdir -p $(@D)
+@@ -49,8 +49,8 @@
+ 	install -m 0755 -o root -g root arptables-save_ $(DESTDIR)$(BINDIR)/arptables-save
+ 	cat arptables-restore | sed 's/__EXEC_PATH__/$(tmp1)/g' > arptables-restore_
+ 	install -m 0755 -o root -g root arptables-restore_ $(DESTDIR)$(BINDIR)/arptables-restore
+-	cat arptables.sysv | sed 's/__EXEC_PATH__/$(tmp1)/g' | sed 's/__SYSCONFIG__/$(tmp2)/g' > arptables.sysv_
+-	if test -d $(DESTDIR)$(INITDIR); then install -m 0755 -o root -g root arptables.sysv_ $(DESTDIR)$(INITDIR)/arptables; fi
++#	cat arptables.sysv | sed 's/__EXEC_PATH__/$(tmp1)/g' | sed 's/__SYSCONFIG__/$(tmp2)/g' > arptables.sysv_
++#	if test -d $(DESTDIR)$(INITDIR); then install -m 0755 -o root -g root arptables.sysv_ $(DESTDIR)$(INITDIR)/arptables; fi
+ 	rm -f arptables-save_ arptables-restore_ arptables.sysv_
+ 
+ .PHONY: install
+Index: arptables-0.0.3.4/extensions/Makefile
+===================================================================
+--- arptables-0.0.3.4.orig/extensions/Makefile	2010-03-08 16:49:28.000000000 +0100
++++ arptables-0.0.3.4/extensions/Makefile	2010-05-06 17:50:30.000000000 +0200
+@@ -3,5 +3,5 @@
+ EXT_FUNC+=standard mangle
+ EXT_OBJS+=$(foreach T,$(EXT_FUNC), extensions/arpt_$(T).o)
+ 
+-extensions/ebt_%.o: extensions/arpt_%.c include/arptables.h include/arptables_common.h
+-	$(CC) $(CFLAGS) $(PROGSPECS) -c -o $@ $<
++extensions/arpt_%.o: extensions/arpt_%.c include/arptables.h include/arptables_common.h
++	$(CC) $(CFLAGS2) $(PROGSPECS) -c -o $@ $<
